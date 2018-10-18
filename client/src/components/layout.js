@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Layout, Input } from "antd";
 
-import * as API from '../../config/api';
-import { request } from '../../lib/utils';
+import * as API from '../config/api';
+import { request } from '../lib/utils';
+import MatchList from './matchList';
 
 const { Header, Content, Footer } = Layout;
 
@@ -22,6 +23,8 @@ class MainLayout extends Component {
   }
 
   render() {
+    const { latestMatchesData } = this.state;
+
     return (
       <Layout>
         <Header className="App-header">League Stats</Header>
@@ -33,7 +36,7 @@ class MainLayout extends Component {
             onSearch={this.handleSearch}
           />
           <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
-            Content
+            <MatchList list={latestMatchesData} />
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>Created by Michael Chen</Footer>
