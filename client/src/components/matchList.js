@@ -1,26 +1,12 @@
 import React from "react";
-import { List, Avatar } from "antd";
+import { List } from "antd";
+import MatchListItem from './matchListItem';
 
 const MatchList = ({ list }) => (
   <List
     itemLayout="horizontal"
     dataSource={list}
-    renderItem={item => (
-      <List.Item>
-        <List.Item.Meta
-          avatar={
-            <Avatar
-              src={`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/${
-                item.championId
-              }.png`}
-            />
-          }
-          title={<div>{item.championId}</div>}
-          description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-        />
-        <div>{item.stats.win ? "VICTORY" : "DEFEAT"}</div>
-      </List.Item>
-    )}
+    renderItem={item => <MatchListItem item={item} />}
   />
 );
 

@@ -2,7 +2,8 @@ const express = require('express');
 const LeagueJs = require("leaguejs");
 
 const { API_KEY, PLATFORM_ID } = require('../config');
-const leagueJs = new LeagueJs(API_KEY, { PLATFORM_ID });
+const { findChampionById } = require('../lib/utils');
+const leagueJs = new LeagueJs(API_KEY, { PLATFORM_ID, STATIC_DATA_ROOT: './static/staticData' });
 const router = express.Router();
 
 router.get('/history/:accountName', async (req, res, next) => {
@@ -22,12 +23,19 @@ router.get('/history/:accountName', async (req, res, next) => {
     for (let match of latestMatches) {
       const matchData = await leagueJs.Match.gettingById(match.gameId)
 
+      console.log(matchData);
       // find user's participant data
       const { participantId } = matchData.participantIdentities.find(p => p.player.accountId === accountData.accountId)
       const participantData = matchData.participants.find(p => p.participantId === participantId);
 
-      console.log(participantData);
-      latestMatchesData.push(participantData);
+      // format data
+      const formattedData = {
+        ...participantData,
+        championName: findChampionById(participantData.championId),
+        gameDuration: matchData.gameDuration
+      }
+  
+      latestMatchesData.push(formattedData);
     }
 
     return res.success({ latestMatchesData });
