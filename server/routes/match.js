@@ -14,19 +14,24 @@ router.get('/history/:accountName', async (req, res, next) => {
     // get match list by accountId
     const matchList = await leagueJs.Match.gettingListByAccount(accountData.accountId);
 
-    const latestMatches = matchList.matches.slice(0, 10);
+    const latestMatches = matchList.matches.slice(0, 5);
 
     // get match data from latestMatches
     const latestMatchesData = [];
 
     for (let match of latestMatches) {
-      console.log(match.gameId);
       const matchData = await leagueJs.Match.gettingById(match.gameId)
-      latestMatchesData.push(matchData);
+
+      // find user's participant data
+      const { participantId } = matchData.participantIdentities.find(p => p.player.accountId === accountData.accountId)
+      const participantData = matchData.participants.find(p => p.participantId === participantId);
+
+      console.log(participantData);
+      latestMatchesData.push(participantData);
     }
 
     return res.success({ latestMatchesData });
-  } catch (e) {
+  } catch (err) {
     return next(err);
   }
 });
