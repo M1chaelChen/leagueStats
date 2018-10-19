@@ -23,6 +23,7 @@ const MatchListItem = ({ item }) => {
   }
   const itemList = itemUrlList.map(url => <Avatar key={url} shape="square" src={url} />)
 
+  console.log(item);
   // calculate total creeps
   const totalCreeps = sum(Object.values(item.timeline.creepsPerMinDeltas));
   const creepsPerMin = (totalCreeps / (item.gameDuration / 60)).toFixed(2);
