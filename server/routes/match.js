@@ -27,10 +27,14 @@ router.get('/history/:accountName', async (req, res, next) => {
       const { participantId } = matchData.participantIdentities.find(p => p.player.accountId === accountData.accountId)
       const participantData = matchData.participants.find(p => p.participantId === participantId);
 
+      // find champion data
+      const championData = findChampionById(participantData.championId);
+
       // format data
       const formattedData = {
         ...participantData,
-        championName: findChampionById(participantData.championId),
+        championName: championData.name,
+        championImg: championData.image.full,
         spell1Img: findSpellById(participantData.spell1Id),
         spell2Img: findSpellById(participantData.spell2Id),
         gameDuration: matchData.gameDuration
