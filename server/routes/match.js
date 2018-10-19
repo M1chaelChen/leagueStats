@@ -1,5 +1,5 @@
 const express = require('express');
-const LeagueJs = require("leaguejs");
+const LeagueJs = require('leaguejs');
 
 const { API_KEY, PLATFORM_ID } = require('../config');
 const { findChampionById, findSpellById } = require('../lib/utils');
@@ -22,18 +22,33 @@ router.get('/history/:accountName', async (req, res, next) => {
 
     for (let match of latestMatches) {
       const matchData = await leagueJs.Match.gettingById(match.gameId)
+      const matchTimelineData = await leagueJs.Match.gettingTimelineById(match.gameId)
 
       // find user's participant data
-      const { participantId } = matchData.participantIdentities.find(p => p.player.accountId === accountData.accountId)
-      const participantData = matchData.participants.find(p => p.participantId === participantId);
+      const { participantId } = matchData.participantIdentities
+        .find(p => p.player.accountId === accountData.accountId)
+      const participantData = matchData.participants
+        .find(p => p.participantId === participantId);
+
+      // find user's timeline data then calculate total creeps
+      const { minionsKilled, jungleMinionsKilled } = matchTimelineData.frames
+        .map(f => f.participantFrames[participantId])
+        .pop();
+
+      const totalCreeps = minionsKilled + jungleMinionsKilled;
+
+      // find champion data
+      const championData = findChampionById(participantData.championId);
 
       // format data
       const formattedData = {
         ...participantData,
-        championName: findChampionById(participantData.championId),
+        championName: championData.name,
+        championImg: championData.image.full,
         spell1Img: findSpellById(participantData.spell1Id),
         spell2Img: findSpellById(participantData.spell2Id),
-        gameDuration: matchData.gameDuration
+        gameDuration: matchData.gameDuration,
+        totalCreeps
       }
   
       latestMatchesData.push(formattedData);
