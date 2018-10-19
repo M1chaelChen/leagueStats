@@ -2,7 +2,7 @@ const express = require('express');
 const LeagueJs = require("leaguejs");
 
 const { API_KEY, PLATFORM_ID } = require('../config');
-const { findChampionById } = require('../lib/utils');
+const { findChampionById, findSpellById } = require('../lib/utils');
 const leagueJs = new LeagueJs(API_KEY, { PLATFORM_ID, STATIC_DATA_ROOT: './static/staticData' });
 const router = express.Router();
 
@@ -32,6 +32,8 @@ router.get('/history/:accountName', async (req, res, next) => {
       const formattedData = {
         ...participantData,
         championName: findChampionById(participantData.championId),
+        spell1Img: findSpellById(participantData.spell1Id),
+        spell2Img: findSpellById(participantData.spell2Id),
         gameDuration: matchData.gameDuration
       }
   

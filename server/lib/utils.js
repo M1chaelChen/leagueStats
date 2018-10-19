@@ -1,4 +1,5 @@
 const champions = require('../static/champion.json');
+const spells = require('../static/spell.json');
 
 exports.findChampionById = (id) => {
   let targetChampion;
@@ -8,4 +9,14 @@ exports.findChampionById = (id) => {
     }
   })
   return targetChampion;
+}
+
+exports.findSpellById = (id) => {
+  let targetSpell;
+  Object.keys(spells.data).forEach(key => {
+    if (spells.data[key].key == id) {
+      targetSpell = spells.data[key].image.full
+    }
+  })
+  return targetSpell;
 }
