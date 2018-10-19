@@ -8,7 +8,9 @@
     "express": "^4.16.4",
     "leaguejs": "^1.10.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
   "scripts": {
     "start": "nodemon app.js"
   },
