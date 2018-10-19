@@ -7,7 +7,7 @@ const app = express();
 const match = require('./routes/match');
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://34.220.166.161',
   optionsSuccessStatus: 200
 }));
 
