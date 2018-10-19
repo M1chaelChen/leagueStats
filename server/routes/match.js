@@ -3,7 +3,7 @@ const LeagueJs = require("leaguejs");
 
 const { API_KEY, PLATFORM_ID } = require('../config');
 const { findChampionById, findSpellById } = require('../lib/utils');
-const leagueJs = new LeagueJs(API_KEY, { PLATFORM_ID, STATIC_DATA_ROOT: './static/staticData' });
+const leagueJs = new LeagueJs(API_KEY, { PLATFORM_ID });
 const router = express.Router();
 
 router.get('/history/:accountName', async (req, res, next) => {
