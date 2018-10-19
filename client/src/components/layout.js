@@ -23,7 +23,6 @@ class MainLayout extends Component {
     });
 
     this.setState({ latestMatchesData, isLoading: false });
-    console.log(latestMatchesData);
   };
 
   render() {

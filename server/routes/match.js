@@ -23,7 +23,6 @@ router.get('/history/:accountName', async (req, res, next) => {
     for (let match of latestMatches) {
       const matchData = await leagueJs.Match.gettingById(match.gameId)
 
-      console.log(matchData);
       // find user's participant data
       const { participantId } = matchData.participantIdentities.find(p => p.player.accountId === accountData.accountId)
       const participantData = matchData.participants.find(p => p.participantId === participantId);
