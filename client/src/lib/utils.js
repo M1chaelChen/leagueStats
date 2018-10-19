@@ -4,7 +4,6 @@ import CONFIG from '../config/config';
 
 export const log = (anyObj) => {
   if (CONFIG.DEV) {
-    /* eslint no-console: "off" */
     // custom console
     console.log(anyObj);
   }
