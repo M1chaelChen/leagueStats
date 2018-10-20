@@ -25,6 +25,10 @@ const MatchListItem = ({ item }) => {
   // calculate creeps per minute
   const creepsPerMin = (item.totalCreeps / (item.gameDuration / 60)).toFixed(2);
 
+  // runes
+  const primaryRune = `/img/${item.primaryRune}`;
+  const secondaryRune = `/img/${item.secondaryRune}`;
+
   return (
     <List.Item>
       <List.Item.Meta
@@ -36,11 +40,14 @@ const MatchListItem = ({ item }) => {
         title={<div>{item.championName} (lv.{item.stats.champLevel})</div>}
         description={
           <div>
-            <div>Length: {duration} KDA: {KDA} </div>
-            <div>Total Creeps: {item.totalCreeps}</div>
-            <div>Creeps Per Min: {creepsPerMin}</div>
+            <div>
+              <Avatar src={primaryRune} />
+              <Avatar src={secondaryRune} />
+            </div>
             <Avatar shape="square" src={spell1ImgUrl} />
             <Avatar shape="square" src={spell2ImgUrl} />
+            <div>{item.totalCreeps} ({creepsPerMin}) CS</div>
+            <div>Length: {duration} KDA: {KDA} </div>
           </div>
         }
       />
