@@ -1,5 +1,6 @@
 const champions = require('../static/champion.json');
 const spells = require('../static/summoner.json');
+const runes = require('../static/runesReforged.json');
 
 exports.findChampionById = (id) => {
   let targetChampion;
@@ -19,4 +20,9 @@ exports.findSpellById = (id) => {
     }
   })
   return targetSpell;
+}
+
+exports.findRuneById = (id) => {
+  const targetRune = runes.find(r => r.id === id);
+  return targetRune.icon;
 }
