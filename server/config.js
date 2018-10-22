@@ -1,4 +1,4 @@
 module.exports = {
   PLATFORM_ID: 'na1',
-  API_KEY: 'RGAPI-e7e3c8ff-74c0-4286-b9f6-0d585db8d093'
+  API_KEY: 'RGAPI-7a10b52f-713c-4b36-a008-5b49a2410423'
 };
