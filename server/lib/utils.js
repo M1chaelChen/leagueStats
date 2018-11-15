@@ -26,3 +26,5 @@ exports.findRuneById = (id) => {
   const targetRune = runes.find(r => r.id === id);
   return targetRune.icon;
 }
+
+exports.getLatestMatches = (matches) => matches.slice(0, 5);

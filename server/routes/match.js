@@ -2,7 +2,7 @@ const express = require('express');
 const LeagueJs = require('leaguejs');
 
 const { API_KEY, PLATFORM_ID } = require('../config');
-const { findChampionById, findSpellById, findRuneById } = require('../lib/utils');
+const { findChampionById, findSpellById, findRuneById, getLatestMatches } = require('../lib/utils');
 const leagueJs = new LeagueJs(API_KEY, { PLATFORM_ID });
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get('/history/:accountName', async (req, res, next) => {
     // get match list by accountId
     const matchList = await leagueJs.Match.gettingListByAccount(accountData.accountId);
 
-    const latestMatches = matchList.matches.slice(0, 5);
+    const latestMatches = getLatestMatches(matchList);
 
     // get match data from latestMatches
     const latestMatchesData = [];
