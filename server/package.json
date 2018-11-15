@@ -10,10 +10,12 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "jest": "^23.6.0",
     "nodemon": "^1.18.4"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
