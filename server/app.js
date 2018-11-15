@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const http = require('http');
 const cors = require('cors');
 
 const app = express();
@@ -33,14 +32,4 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3001;
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-const server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-server.listen(port, () => {
-  console.log(`Server Running on http://127.0.0.1:${port}`);
-});
+module.exports = app;
