@@ -1,9 +1,7 @@
 const express = require('express');
-const LeagueJs = require('leaguejs');
 
-const { API_KEY, PLATFORM_ID } = require('../config');
-const { findChampionById, findSpellById, findRuneById, getLatestMatches } = require('../lib/utils');
-const leagueJs = new LeagueJs(API_KEY, { PLATFORM_ID });
+const leagueJs = require('../lib/league');
+const { findChampionById, findSpellById, findRuneById, getLatestMatches, getTotalCreeps } = require('../lib/utils');
 const router = express.Router();
 
 router.get('/history/:accountName', async (req, res, next) => {
@@ -35,7 +33,7 @@ router.get('/history/:accountName', async (req, res, next) => {
         .map(f => f.participantFrames[participantId])
         .pop();
 
-      const totalCreeps = minionsKilled + jungleMinionsKilled;
+      const totalCreeps = getTotalCreeps(minionsKilled, jungleMinionsKilled);
 
       // find champion data
       const championData = findChampionById(participantData.championId);

@@ -28,3 +28,5 @@ exports.findRuneById = (id) => {
 }
 
 exports.getLatestMatches = (matches) => matches.slice(0, 5);
+
+exports.getTotalCreeps = (minionsKilled, jungleMinionsKilled) => minionsKilled + jungleMinionsKilled;
