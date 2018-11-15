@@ -9,11 +9,11 @@ router.get('/history/:accountName', async (req, res, next) => {
     const { accountName } = req.params;
     // get account data
     const accountData = await leagueJs.Summoner.gettingByName(accountName);
-
+    
     // get match list by accountId
     const matchList = await leagueJs.Match.gettingListByAccount(accountData.accountId);
-
-    const latestMatches = getLatestMatches(matchList);
+    
+    const latestMatches = getLatestMatches(matchList.matches);
 
     // get match data from latestMatches
     const latestMatchesData = [];
