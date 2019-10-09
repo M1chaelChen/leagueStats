@@ -1,10 +1,10 @@
 import React from 'react';
 import { List, Avatar } from "antd";
-import { durationToDate, toKda } from '../lib/utils';
+import { durationToTime, toKda } from '../lib/utils';
 
 const MatchListItem = ({ item }) => {
   const avatarUrl = `/img/champion/${item.championImg}`;
-  const duration = durationToDate(item.gameDuration);
+  const duration = durationToTime(item.gameDuration);
   
   const spell1ImgUrl = `/img/spell/${item.spell1Img}`;
   const spell2ImgUrl = `/img/spell/${item.spell2Img}`;
